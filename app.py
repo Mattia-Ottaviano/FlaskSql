@@ -4,7 +4,24 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])     
 def home():
-    return render_template('search.html')
+    return render_template('home.html')
+
+
+@app.route('/opzione', methods=['GET'])     
+def opzione():
+    scelta = request.args['scelta']
+    if scelta == 'es1':
+        return render_template('es1.html')
+    elif scelta == 'es2':
+        return render_template('es2.html')
+    if scelta == 'es3':
+        return render_template('es3.html')
+    elif scelta == 'es4':
+        return render_template('es4.html')
+
+    
+
+
 
 @app.route('/result', methods=['GET'])     
 def result():
