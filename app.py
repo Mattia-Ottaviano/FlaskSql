@@ -1,9 +1,16 @@
-from flask import Flask,render_template, request, redirect, url_for
+from flask import Flask,render_template, request, redirect, url_for, Response
 app = Flask(__name__)
 
 #importazione 
 import pandas as pd
 import pymssql
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import io
+
 
 @app.route('/', methods=['GET'])     
 def home():
@@ -43,7 +50,7 @@ def es1():
 def graficoEs1():
     #costruzione grafico
     fig, ax = plt.subplots(figsize = (6,4))
-    
+    fig.autofmt_xdate(rotation=90)
     ax.bar(df1.category_name, df1.numero_prodotti, color='g')
 
     #visualizzazione grafico
@@ -62,6 +69,7 @@ def es2():
 
     # Invio query al Database e ricezione informazioni
     query = 'SELECT store_name, count(*) as numero_ordini from sales.orders inner join sales.stores on stores.store_id = orders.store_id group by store_name'
+    global df2
     df2 = pd.read_sql(query,conn)
 
     # visualizzare le informazioni
@@ -72,7 +80,7 @@ def es2():
 def graficoEs2():
     #costruzione grafico
     fig, ax = plt.subplots(figsize = (6,4))
-    
+    fig.autofmt_xdate(rotation=90)
     ax.bar(df2.store_name, df2.numero_ordini, color='g')
 
     #visualizzazione grafico
@@ -90,6 +98,7 @@ def es3():
 
     # Invio query al Database e ricezione informazioni
     query = 'SELECT brand_name, count(*) as numero_prodotti FROM production.products inner join production.brands on brands.brand_id = products.brand_id group by brand_name'
+    global df3
     df3 = pd.read_sql(query,conn)
 
     # visualizzare le informazioni
@@ -100,9 +109,10 @@ def es3():
 @app.route('/graficoEs3', methods=['GET'])
 def graficoEs3():
     #costruzione grafico
-    fig, ax = plt.subplots(figsize = (6,4))
-    
-    ax.bar(df3.store_name, df3.numero_ordini, color='g')
+    fig = plt.figure()
+    ax = plt.axes()
+    cols = ['c','b','hotpink','yellow','red','brown'] 
+    ax.pie(df3.numero_prodotti,colors=cols,labels=df3.brand_name)
 
     #visualizzazione grafico
     output = io.BytesIO()
