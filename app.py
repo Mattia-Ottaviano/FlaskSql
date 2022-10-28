@@ -34,7 +34,7 @@ def selezione():
 def es1():
     
     # collegamento al Database   
-    conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS', user= 'ottaviano.mattia', password='minou#@123!Mo05', database='ottaviano.mattia')
+    conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS', user= 'ottaviano.mattia', password='', database='ottaviano.mattia')
 
     # Invio query al Database e ricezione informazioni
     query = 'SELECT category_name, count(*) as numero_prodotti FROM production.products inner join production.categories on categories.category_id = products.category_id group by category_name'
