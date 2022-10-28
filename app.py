@@ -34,7 +34,7 @@ def selezione():
 def es1():
     
     # collegamento al Database   
-    conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS', user= 'ottaviano.mattia', password='', database='ottaviano.mattia')
+    conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS', user= 'ottaviano.mattia', password='xxx123##', database='ottaviano.mattia')
 
     # Invio query al Database e ricezione informazioni
     query = 'SELECT category_name, count(*) as numero_prodotti FROM production.products inner join production.categories on categories.category_id = products.category_id group by category_name'
@@ -65,7 +65,7 @@ def graficoEs1():
 def es2():
     
     # collegamento al Database
-    conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS', user= 'ottaviano.mattia', password='5', database='ottaviano.mattia')
+    conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS', user= 'ottaviano.mattia', password='xxx123##', database='ottaviano.mattia')
 
     # Invio query al Database e ricezione informazioni
     query = 'SELECT store_name, count(*) as numero_ordini from sales.orders inner join sales.stores on stores.store_id = orders.store_id group by store_name'
@@ -94,7 +94,7 @@ def graficoEs2():
 def es3():
     
     # collegamento al Database
-    conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS', user= 'ottaviano.mattia', password='', database='ottaviano.mattia')
+    conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS', user= 'ottaviano.mattia', password='xxx123##', database='ottaviano.mattia')
 
     # Invio query al Database e ricezione informazioni
     query = 'SELECT brand_name, count(*) as numero_prodotti FROM production.products inner join production.brands on brands.brand_id = products.brand_id group by brand_name'
@@ -128,7 +128,7 @@ def es4():
 
 @app.route('/ricProd', methods=['GET'])     
 def ricProd():
-    conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS', user= 'ottaviano.mattia', password='', database='ottaviano.mattia')
+    conn = pymssql.connect(server='213.140.22.237\SQLEXPRESS', user= 'ottaviano.mattia', password='xxx123##', database='ottaviano.mattia')
 
     # Invio query al Database e ricezione informazioni
     NomeProdotto = request.args['NomeProdotto']
